@@ -7,7 +7,7 @@ This is setup to run in an AWS EC2 virtual machine. The server can be cloned fro
 
 1. This clones the Github repository.
 ```bash
-git clone https://github.com/lalala0095/restaurant-finder
+git clone -b backend https://github.com/lalala0095/restaurant-finder
 ```
 
 2. Go to the created directory.
@@ -26,8 +26,12 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-5. You need to create an `.env` file for the environment variables. Below is an example of what the `.env` file might look like:
+5. You need to create an `.env` file for the environment variables.
+```bash
+sudo nano .env
+```
 
+Write the following to the `.env` file:
 ```env
 GEMINI_API_KEY="YOUR_GEMINI_API_KEY"
 FOURSQUARE_API_KEY="YOUR_FOURSQUARE_API_KEY"
