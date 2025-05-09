@@ -62,6 +62,13 @@ Follow this documentations for setting up cloudflared tunnels:
 nohup cloudflared tunnel --url http://localhost:8002 > cloudflared.log 2>&1 & echo $! > cloudflared.pid
 ```
 
+10. This will generate a log named `cloudflared.log`. View the log and get the auto-generated URL.:
+```bash
+cat cloudflared.log
+```
+This URL will be the main API base URL for the frontend.
+
+
 ## Notes on how to deploy to production.
 In main.py file, you can add the frontend's URL so that the FastAPI server will accept the requests coming from the frontend.
 Add it in this part:
