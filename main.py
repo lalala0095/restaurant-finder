@@ -74,27 +74,27 @@ async def execute(request: MessageRequest):
     sort = fsq_json_input['parameters'].get('sort', None)
 
     url1 = "https://api.foursquare.com/v3/places/search?query="
-    url2 = "&fields=name%2Clocation%2Ccategories%2Crating%2Cfeatures%2Chours%2Cprice"
-    url3 = "&ll="
-    url4 = "&radius="
-    url5 = "&min_price="
-    url6 = "&max_price="
-    url7 = "&open_at="
-    url8 = "&open_now="
-    url9 = "&near="
-    url10 = "&sort="
-    url11 = "&fields=name%2Clocation%2Ccategories%2Cprice%2Chours%2Crating%2Cfeatures"
+    url2 = "&ll="
+    url3 = "&radius="
+    url4 = "&min_price="
+    url5 = "&max_price="
+    url6 = "&open_at="
+    url7 = "&open_now="
+    url8 = "&near="
+    url9 = "&sort="
+    url10 = "&fields=name%2Clocation%2Ccategories%2Cprice%2Chours%2Crating%2Cfeatures"
+    url11 = "&categories=4bf58dd8d48988d120951735,56aa371be4b08b9a8d57350b,4bf58dd8d48988d1cb941735,4d4b7105d754a06374d81259,4bf58dd8d48988d16e941735,5665c7b9498e7d8a4f2c0f06,63be6904847c3692a84b9bb6,4bf58dd8d48988d1e0931735,52e81612bcbc57f1066b7a00,4bf58dd8d48988d16e941735,4bf58dd8d48988d1ce941735,4bf58dd8d48988d14f941735,53e0feef498e5aac066fd8a9,4bf58dd8d48988d1ef931735".replace(",", "%2C")
 
     params_list = [
         (query, url1),
-        (ll, url3), 
-        (radius, url4), 
-        (min_price, url5), 
-        (max_price, url6),
-        (open_at, url7), 
-        (open_now, url8), 
-        (near, url9), 
-        (sort, url10)
+        (ll, url2), 
+        (radius, url3), 
+        (min_price, url4), 
+        (max_price, url5),
+        (open_at, url6), 
+        (open_now, url7), 
+        (near, url8), 
+        (sort, url9)
     ]
     params_new_list = []
     params_counter = 0
@@ -105,6 +105,7 @@ async def execute(request: MessageRequest):
                 params_new_list.append(url2)
             params_new_list.append(url)
             params_new_list.append(str(p))
+    params_new_list.append(url10)
     params_new_list.append(url11)
     final_url = "".join(params_new_list)
     print(final_url)
@@ -129,9 +130,14 @@ async def execute(request: MessageRequest):
                     new_cuisines.add(category_short_name)
             meals = features.get('food_and_drink', {}).get("meals", {})
             for meal_name, meal_data in meals.items():
-                for value in meal_data:
-                    if value:
-                        new_cuisines.add(value)
+                print(meal_name, meal_data)
+                try:
+                    for value in meal_data:
+                        if value:
+                            new_cuisines.add(value)
+                except TypeError:
+                    if meal_data == True:
+                        new_cuisines.add(f"{meal_name}: Yes")
             new_cuisines = list(new_cuisines)
             rating = r.get('rating', "Not found.")
             
@@ -168,6 +174,8 @@ async def execute(request: MessageRequest):
             if p:
                 params_new_list.append(url)
                 params_new_list.append(str(p))
+        params_new_list.append(url10)
+        params_new_list.append(url11)
         final_url = "".join(params_new_list)
         print(final_url)
         print("now requesting the fsq_json_input to Four Square restaurant API.")
@@ -191,9 +199,14 @@ async def execute(request: MessageRequest):
                         new_cuisines.add(category_short_name)
                 meals = features.get('food_and_drink', {}).get("meals", {})
                 for meal_name, meal_data in meals.items():
-                    for value in meal_data:
-                        if value:
-                            new_cuisines.add(value)
+                    print(meal_name, meal_data)
+                    try:
+                        for value in meal_data:
+                            if value:
+                                new_cuisines.add(value)
+                    except TypeError:
+                        if meal_data == True:
+                            new_cuisines.add(f"{meal_name}: Yes")
                 new_cuisines = list(new_cuisines)
                 rating = r.get('rating', "Not found.")
 
