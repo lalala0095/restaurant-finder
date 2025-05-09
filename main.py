@@ -42,7 +42,7 @@ async def execute(request: MessageRequest):
         {{
         "action": "restaurant_search",
         "parameters": {{
-            "query": "sushi", # this is important to be concise to the product that the user needs
+            "query": "sushi", # A string to be matched against all content for this place, including but not limited to venue name, category, telephone number, taste, and tips.
             "ll": "41.8781,-87.6298", # this is optional, this is the longitude/latitude of the location of the user if given
             "radius": 22000, # this is in meters, on how wide the search will be, and is optional
             "min_price": 1, # 1 (most affordable) to 4 (most expensive) - do not misinterpret this to the currency, estimate how cheap the user is finding for a product
