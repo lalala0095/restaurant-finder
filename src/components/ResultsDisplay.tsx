@@ -21,7 +21,7 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ results, loading, error
   }
 
   return (
-    <div className="space-y-4"> {/* Adds space between child elements (the cards) */}
+    <div className="space-y-4">
       <h2 className="text-2xl font-semibold text-gray-700 mb-4">Search Results:</h2>
       {results.map((restaurant) => (
         <div key={restaurant.id || restaurant.name} className="bg-white p-5 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">

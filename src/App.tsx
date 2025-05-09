@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import SearchBar from './components/SearchBar';
 import ResultsDisplay from './components/ResultsDisplay';
 import type { Restaurant, ApiRequest, ApiResponse } from './types';
-// No need to import App.css if all styling is via Tailwind and index.css
 
 const App: React.FC = () => {
   const [results, setResults] = useState<Restaurant[]>([]);
@@ -52,7 +51,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 md:p-6 max-w-2xl"> {/* Centered container with padding */}
+    <div className="container mx-auto p-4 md:p-6 max-w-2xl">
       <header className="text-center my-6 md:my-8">
         <h1 className="text-3xl md:text-4xl font-bold text-blue-700">
           Restaurant Finder
