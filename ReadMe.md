@@ -3,7 +3,13 @@
 This is a simple FastAPI server that provides an endpoint to let the user find relevant Restaurants based on their user query.
 
 ## Setup to run the server
-This is setup to run in an AWS EC2 virtual machine. The server can be cloned from a Github repository. Execute the following steps in an EC2 instance:
+This is setup to run in an AWS EC2 virtual machine. To mimic the server locally in Windows, you can install WSL by running:
+```bash
+wsl --install Ubuntu
+```
+Ubuntu here is the distro used to develop this server. You may use other Linux distros you might prefer.
+
+The server can be cloned from a Github repository. Execute the following steps in an EC2 instance:
 
 1. This clones the Github repository.
 ```bash
