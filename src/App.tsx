@@ -18,7 +18,7 @@ const App: React.FC = () => {
     const requestBody: ApiRequest = { message };
 
     try {
-      const response = await fetch('http://localhost:8000/api/execute', {
+      const response = await fetch('https://belly-compare-committed-pressed.trycloudflare.com/api/execute', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
