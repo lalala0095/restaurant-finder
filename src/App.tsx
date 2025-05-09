@@ -7,16 +7,18 @@ const App: React.FC = () => {
   const [results, setResults] = useState<Restaurant[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasSearched, setHasSearched] = useState<boolean>(false);
 
   const handleSearch = async (message: string) => {
     setLoading(true);
     setError(null);
     setResults([]);
+    setHasSearched(true);
 
     const requestBody: ApiRequest = { message };
 
     try {
-      const response = await fetch('https://belly-compare-committed-pressed.trycloudflare.com/api/execute', {
+      const response = await fetch('http://localhost:8000/api/execute', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +61,7 @@ const App: React.FC = () => {
       </header>
       <main>
         <SearchBar onSearch={handleSearch} loading={loading} />
-        <ResultsDisplay results={results} loading={loading} error={error} />
+        <ResultsDisplay results={results} loading={loading} error={error} hasSearched={hasSearched} />
       </main>
     </div>
   );

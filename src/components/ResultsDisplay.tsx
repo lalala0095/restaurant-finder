@@ -5,9 +5,10 @@ interface ResultsDisplayProps {
   results: Restaurant[];
   loading: boolean;
   error: string | null;
+  hasSearched: boolean;
 }
 
-const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ results, loading, error }) => {
+const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ results, loading, error, hasSearched }) => {
   if (loading) {
     return <p className="text-center text-gray-500 py-4">Loading results...</p>;
   }
@@ -16,13 +17,15 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ results, loading, error
     return <p className="text-center text-red-500 bg-red-100 border border-red-400 p-3 rounded-md">Error: {error}</p>;
   }
 
-  if (results.length === 0) {
+  if (hasSearched && !loading && !error && results.length === 0) {
     return <p className="text-center text-gray-500 py-4">No restaurants found. Try widening the location of the search!</p>;
   }
 
   return (
     <div className="space-y-4">
-      <h2 className="text-2xl font-semibold text-gray-700 mb-4">Search Results:</h2>
+      {(hasSearched && !loading && !error && results.length > 0) ? (
+          <h2 className="text-2xl font-semibold text-gray-700 mb-4">Search Results:</h2>
+      ) : null}
       {results.map((restaurant) => (
         <div key={restaurant.id || restaurant.name} className="bg-white p-5 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow">
           <h3 className="text-xl font-bold text-blue-600 mb-2">{restaurant.name}</h3>
