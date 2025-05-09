@@ -53,6 +53,15 @@ nohup uvicorn main:app --host 0.0.0.0 --port 8000 > fastapi.log 2>&1 & echo $! >
 - `fastapi.log` will contain the server's output logs.
 - `fastapi.pid` will store the PID of the running process, which can be used to stop the server later.
 
+8. In order for this backend server to communicate with the frontend, you need to setup cloudflared tunnel. This will auto-generate an https URL for the FastAPI server.
+Follow this documentations for setting up cloudflared tunnels:
+`https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/`
+
+9. Run cloudflared tunnel with nohup.
+```bash
+nohup cloudflared tunnel --url http://localhost:8002 > cloudflared.log 2>&1 & echo $! > cloudflared.pid
+```
+
 ## Notes on how to deploy to production.
 In main.py file, you can add the frontend's URL so that the FastAPI server will accept the requests coming from the frontend.
 Add it in this part:
