@@ -83,6 +83,7 @@ async def execute(request: MessageRequest):
     url8 = "&open_now="
     url9 = "&near="
     url10 = "&sort="
+    url11 = "&fields=name%2Clocation%2Ccategories%2Cprice%2Chours%2Crating%2Cfeatures"
 
     params_list = [
         (query, url1),
@@ -104,6 +105,7 @@ async def execute(request: MessageRequest):
                 params_new_list.append(url2)
             params_new_list.append(url)
             params_new_list.append(str(p))
+    params_new_list.append(url11)
     final_url = "".join(params_new_list)
     print(final_url)
     print("now requesting the fsq_json_input to Four Square restaurant API.")
@@ -136,6 +138,7 @@ async def execute(request: MessageRequest):
             returned_price = r.get('price', 0)
             if returned_price == 0:
                 price_level = "Not found."
+                print(r)
             elif returned_price == 1:
                 price_level = "Very Affordable."
             elif returned_price == 2:
